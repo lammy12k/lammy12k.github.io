@@ -1,0 +1,66 @@
+---
+import { Image } from 'astro:assets';
+import pfpImage from '../assets/images/pfp.png';
+import '../styles/shared.css';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="font-spartan">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+	<link rel="icon" type="image/png" href="favicon.png">
+  </head>
+  <body class="min-h-screen bg-primary text-neutral-200 flex flex-col justify-between selection:bg-lime selection:text-primary">
+    <header class="sticky top-0 z-50 bg-[#121212] border-b border-neutral-800/80 px-6 py-4">
+      <div class="max-w-4xl mx-auto flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3 group -translate-x-[80px]">
+          <Image 
+            src={pfpImage} 
+            alt="Profile picture" 
+            class="w-24 h-24 rounded-full object-cover border-2 border-neutral-700 group-hover:border-lime transition-all duration-300"
+          />
+        </a>
+
+        <nav class="flex items-center gap-8 text-white font-bold text-fluid-lg">
+          <a href="/about" class="relative py-1 group">
+            ABOUT
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-lime transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="/projects" class="relative py-1 group">
+            PROJECTS
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-lime transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a 
+            href="https://github.com/lammy12k" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="relative py-1 group"
+          >
+            GITHUB
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-coral transition-all duration-300 group-hover:w-full"></span>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="grow relative z-10">
+      <slot />
+    </div>
+
+    <footer class="relative z-30 border-t border-neutral-800/80 bg-[#121212] px-6 py-8">
+      <div class="max-w-4xl mx-auto text-center text-fluid-sm text-neutral-400">
+        <p>
+          Code licensed under <a href="https://opensource.org" target="_blank" rel="noopener noreferrer" class="text-lime hover:underline font-bold">MIT</a>. Site content © 2026 lammy12k. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

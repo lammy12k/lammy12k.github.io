@@ -1,17 +1,186 @@
 ---
+import Layout from '../layouts/layout.astro';
 
+interface Project {
+  title: string;
+  lang: string;
+  desc: string;
+  source?: string;
+}
+
+const projects: Project[] = [
+  { 
+    title: "JavLates", 
+    lang: "Java", 
+    desc: "JavLates is a compile-time template metaprogramming framework for Java that brings C++ style templates including non-type parameters, template specialization, and compile-time recursion to the Java ecosystem.",
+    source: "https://github.com/lammy12k/JavLates"
+  },
+  { 
+    title: "CHFE", 
+    lang: "C++", 
+    desc: "Lightweight, high-performance CMake tool for embedding files into executables with zero code changes and no temporary files (Windows & Linux).",
+    source: "https://github.com/Lovent-Labs/CHFE"
+  },
+];
+
+const MIN_CAROUSEL_ITEMS = 8;
+const repeatMultiplier = Math.ceil(MIN_CAROUSEL_ITEMS / (projects.length || 1));
+const displayProjects = Array(repeatMultiplier * 2).fill(projects).flat();
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Systems & Open-Source Engineer">
+  <main class="relative z-10 w-full overflow-x-hidden">
+    
+    <div class="relative min-h-screen flex flex-col justify-center items-center max-w-4xl mx-auto px-6 py-20 text-center">
+            <div 
+        id="parallax-container" 
+        class="fixed inset-0 pointer-events-none z-0 flex items-center justify-center overflow-hidden"
+        style="perspective: 800px;"
+      >
+        <div 
+          id="heap-grid-3d" 
+          class="w-[140vw] h-[140vh] grid grid-cols-12 sm:grid-cols-20 gap-3 p-8 opacity-30 bg-[#121212]/40 transition-transform duration-100 ease-out"
+          style="transform: rotateX(20deg) rotateY(0deg) scale(1.1); mask-image: radial-gradient(circle, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 80%); -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 80%);"
+        >
+        </div>
+      </div>
+
+      <section class="relative z-10 flex flex-col items-center justify-center">
+        <h1 class="text-fluid-4xl sm:text-7xl font-extrabold text-white tracking-tight leading-none mb-6">
+          LAMMY<span class="text-coral">12K</span>
+        </h1>
+
+        <p class="text-fluid-lg text-neutral-300 leading-relaxed font-normal max-w-2xl mb-8 bg-[#1c1c1c]/90 backdrop-blur-md p-4 border border-neutral-800/80">
+          Open-Source Software Engineer specializing in <span class="text-lime font-bold">C++</span>, <span class="text-lime font-bold">Java</span>, and <span class="text-lime font-bold">Rust</span>. Building ambitious, high-performance systems and developer tools.
+        </p>
+      </section>
+    </div>
+
+    <div class="relative z-20 bg-primary pt-24 pb-32 border-t border-neutral-800/60 shadow-[0_-30px_50px_rgba(18,18,18,0.9)]">
+      
+      <div class="absolute -top-32 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-primary pointer-events-none"></div>
+
+      <div class="max-w-4xl mx-auto px-6 mb-12">
+        <h2 class="text-fluid-xl font-extrabold text-white tracking-wide border-l-4 border-lime pl-4">
+          FEATURED_PROJECTS
+        </h2>
+      </div>
+
+      <div class="relative w-full overflow-hidden py-4">
+        <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-primary to-transparent z-10 pointer-events-none"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-primary to-transparent z-10 pointer-events-none"></div>
+
+        <div class="flex gap-6 w-max animate-carousel hover:[animation-play-state:paused]">
+          {displayProjects.map((item, index) => (
+            <div class="w-80 sm:w-96 flex-shrink-0 bg-[#121212] border border-neutral-800 p-6 flex flex-col justify-between group hover:border-lime transition-all duration-300">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="text-xs font-bold text-lime tracking-widest bg-lime/10 px-2 py-1 border border-lime/30">
+                    {item.lang}
+                  </span>
+                  <span class="text-neutral-600 font-mono text-xs">0x{index.toString(16).padStart(2, '0')}</span>
+                </div>
+                <h3 class="text-fluid-base font-extrabold text-white mb-3 group-hover:text-lime transition-colors">
+                  {item.title}
+                </h3>
+                <p class="text-neutral-400 text-sm leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-neutral-800/80">
+                {item.source ? (
+                  <a 
+                    href={item.source} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="flex items-center justify-between text-xs font-bold text-neutral-400 hover:text-lime transition-colors"
+                  >
+                    <span>VIEW SOURCE</span>
+                    <span>→</span>
+                  </a>
+                ) : (
+                  <div class="flex items-center justify-between text-xs font-bold text-neutral-600">
+                    <span>PRIVATE_REPO</span>
+                    <span>-</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+</Layout>
+
+<style>
+  @keyframes carousel {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-carousel {
+    animation: carousel 125s linear infinite;
+  }
+</style>
+
+<script>
+  function setupHyprlandGrid() {
+    const TOTAL_BLOCKS = 280;
+    const grid = document.getElementById('heap-grid-3d');
+
+    if (!grid) return;
+
+    let blocks = Array(TOTAL_BLOCKS).fill(0);
+
+    grid.innerHTML = '';
+    for (let i = 0; i < TOTAL_BLOCKS; i++) {
+      const cell = document.createElement('div');
+      cell.id = `block-${i}`;
+      cell.className = 'w-full h-full bg-neutral-800/40 border border-neutral-700/30 transition-colors duration-200';
+      grid.appendChild(cell);
+    }
+
+    function updateVisuals() {
+      blocks.forEach((state, i) => {
+        const cell = document.getElementById(`block-${i}`);
+        if (!cell) return;
+
+        if (state === 1) {
+          cell.className = 'w-full h-full bg-lime border border-lime transition-colors duration-150 shadow-[0_0_12px_#bbff69]';
+        } else if (state === 2) {
+          cell.className = 'w-full h-full bg-coral border border-coral transition-colors duration-150 shadow-[0_0_12px_#f75a4f]';
+        } else {
+          cell.className = 'w-full h-full bg-neutral-800/20 border border-neutral-800/40 transition-colors duration-300';
+        }
+      });
+    }
+
+    function stepAllocation() {
+      const randomIndex = Math.floor(Math.random() * TOTAL_BLOCKS);
+      if (blocks[randomIndex] === 0) {
+        blocks[randomIndex] = Math.random() > 0.82 ? 2 : 1;
+      } else {
+        blocks[randomIndex] = 0;
+      }
+      updateVisuals();
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!grid) return;
+      const scrollY = window.scrollY;
+      grid.style.transform = `rotateX(${20 + scrollY * 0.05}deg) translateY(${scrollY * 0.2}px) scale(1.1)`;
+    });
+
+    setInterval(stepAllocation, 100);
+  }
+
+  setupHyprlandGrid();
+</script>

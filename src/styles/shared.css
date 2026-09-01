@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1c1c1c;
+  --color-header: #121212;
+  --color-coral: #f75a4f;
+  --color-lime: #bbff69;
+
+  --font-spartan: 'League Spartan', sans-serif;
+
+  --radius-xs: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
+
+  --text-fluid-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+  --text-fluid-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+  --text-fluid-lg: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
+  --text-fluid-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+  --text-fluid-2xl: clamp(1.5rem, 1.2rem + 1.5vw, 2rem);
+  --text-fluid-3xl: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+}
+
+html, body {
+  background-color: var(--color-primary);
+  color: #e5e5e5;
+  min-height: 100vh;
+}
+
+*:not(.rounded-full) {
+  border-radius: 0px !important;
+}
